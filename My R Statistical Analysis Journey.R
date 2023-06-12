@@ -86,3 +86,40 @@ roster <- cbind(Firstname,  Lastname, roster[,-1])
 
 roster <- roster[order(Lastname, Firstname),] #order the students by last name then by first name 
 roster
+
+#aggregating mtcars data
+options(digits=4)
+attach(mtcars)
+aggdata <- aggregate(mtcars, by=list(cyl, gear), FUN=mean, na.rm=TRUE)
+aggdata
+
+#VISUALIZATION
+#Barplot
+library(vcd)
+counts <- table(Arthritis$Improved) #arthritis dataset from the vcd package
+barplot(counts, main="Basic Bar Plot", xlab="Improvement", ylab="Frequency") #simple bar plot
+barplot(counts, main="Horizontal Bar Plot", xlab="Frequency", ylab="Improvement", horiz=TRUE) #horizontal bar chart
+
+counts <- table(Arthritis$Improved, Arthritis$Treatment)
+barplot(counts, main="Stacked Bar Plot", xlab="Treatment", ylab="Frequency", col=c("purple", "blue", "gold"), legend=rownames(counts)) #stacked bar plot
+barplot(counts, main="Group Bar Plot", xlab="Treatment", ylab="Frequency", col=c("purple", "blue", "gold"), legend=rownames(counts), beside=TRUE) #grouped bar plot
+
+states <- data.frame(state.region, state.x77)
+means <- aggregate(states$Illiteracy, by=list(state.region), mean)
+means <- means[order(means$x),]
+means
+barplot(means$x, names.arg=means$Group.1, cex.names = 0.9, main= "Mean Illiteracy Rate", col=c("black")) #barplot of mean illiteracy rate
+
+#Pie Chart
+library(plotrix)
+par(mfrow=c(2,2)) #combining 4 graphs into one
+slices <- c(10, 12, 4, 16, 8)
+lbls <- c("US", "UK", "AUSTRALIA", "GERMANY", "FRANCE")
+pie(slices, labels=lbls, main="A simple Pie Chart") #simple pie chart
+
+ptg <- round((slices)/sum(slices)*100) #slices as percentages
+lbls2 <- paste(lbls, " ", ptg, "%", sep="")
+pie(slices, labels=lbls2, col=rainbow(5), main="Pie Chart With Percentages") #slices as percentages
+pie3D(slices, labels=lbls, explode=0.1, main="3D Pie Chart")
+
+fan.plot(slices, labels=lbls, main="Fan Plot") #fan plot
