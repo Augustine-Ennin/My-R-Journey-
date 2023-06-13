@@ -123,3 +123,14 @@ pie(slices, labels=lbls2, col=rainbow(5), main="Pie Chart With Percentages") #sl
 pie3D(slices, labels=lbls, explode=0.1, main="3D Pie Chart")
 
 fan.plot(slices, labels=lbls, main="Fan Plot") #fan plot
+
+#Histogram
+hist(mtcars$mpg, freq=FALSE, breaks=12, col="grey", xlab="Miles/Gallon", main="Histogram, Rug Plot, and Density Curve") #histogram with rug plot and density curve 
+rug(jitter(mtcars$mpg), side=1, col="black")
+lines(density(mtcars$mpg), col="black", lwd=2)
+
+#Kernel Density Plot
+kd <- density(mtcars$mpg)
+plot(kd, lwd=2, main="Kernel Density of mpg")
+polygon(kd, col="grey")
+rug(mtcars$mpg)
