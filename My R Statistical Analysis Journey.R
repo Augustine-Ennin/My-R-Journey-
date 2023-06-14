@@ -134,3 +134,17 @@ kd <- density(mtcars$mpg)
 plot(kd, lwd=2, main="Kernel Density of mpg")
 polygon(kd, col="grey")
 rug(mtcars$mpg)
+
+#Comparative Kernel Density Plot for mtcars$cyl and mtcars$mpg
+library(sm)
+attach(mtcars)
+cyl.f <- factor(cyl, levels = c(4,6,8), labels = c("4 Cylinders", "6 Cylinders", "8 Cylinders"))
+sm.density.compare(mpg, cyl, xlab = "Miles/Gallon", lwd=2)
+title("Miles Per Gallons Distribution by Car Cylinders")
+legend("topright", levels(cyl.f), fill = 2:(1+length(levels(cyl.f))), bty = "n")
+
+#Box Plot
+boxplot(mtcars$mpg, main="Box Plot", ylab="Miles per Gallon") # A simple box plot of mpg of the mtcars data
+boxplot.stats(mtcars$mpg) #statistics of our boxplot
+
+boxplot(mpg~cyl, data = mtcars, main="Car Mileage", xlab = "Number of Cylinders", ylab = "Miles Per Gallon", col="red") #different cylinders and their miles/gallon using boxplot
