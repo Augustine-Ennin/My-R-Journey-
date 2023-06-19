@@ -148,3 +148,24 @@ boxplot(mtcars$mpg, main="Box Plot", ylab="Miles per Gallon") # A simple box plo
 boxplot.stats(mtcars$mpg) #statistics of our boxplot
 
 boxplot(mpg~cyl, data = mtcars, main="Car Mileage", xlab = "Number of Cylinders", ylab = "Miles Per Gallon", col="red") #different cylinders and their miles/gallon using boxplot
+
+#BASIC STATISTICS
+options(digits = 4)
+library(e1071)
+myvars <- c("mpg", "hp", "wt")
+mystats <- function(x){
+  complete_x <- x[complete.cases(x)]
+  n <- length(x)
+  kurt <-kurtosis(x)
+  skew <- skewness(x)
+  m <- mean(x)
+  s <- sd(x)
+  return(c(n=n, mean=m, stdv=s, skewness=skew, kurtosis=kurt))
+} #A function to calculate the length, mean, sd, skewness, kurtosis, of some selected variables in the mtcars data 
+sapply(mtcars[myvars], mystats)
+
+library(psych)
+describe(mtcars[myvars]) #using describe function in the psych package to calculate various statistical measure of myvars 
+
+library(psych)
+by(mtcars[myvars], mtcars$am, describe) #aggregate statistics of myvars and transmission type variables in the mtcars data
