@@ -169,3 +169,12 @@ describe(mtcars[myvars]) #using describe function in the psych package to calcul
 
 library(psych)
 by(mtcars[myvars], mtcars$am, describe) #aggregate statistics of myvars and transmission type variables in the mtcars data
+
+#Test of independence
+library(vcd)
+attach(Arthritis)
+mytable1 <- xtabs(~ Treatment + Improved)
+chisq.test(mytable1) #test of independence between treatment and improved using chi-square test. We reject the null hypothesis that there is independence between the variables because p<0.01
+
+mytable2 <- table(Improved, Sex)
+chisq.test(mytable2) #test of independence between improved and sex using chi-square test. We  refuse to reject the null hypothesis that there is independence between the variables because p>0.05
